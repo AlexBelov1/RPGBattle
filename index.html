@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="staff.png" type="image/icon type" />
+    <title>RPGBattle</title>
+  </head>
+  <body>
+    <div class="screen">
+      <h1>Начните битву с монстром</h1>
+      <a href="#" class="start" id="start">Начать игру</a>
+    </div>
+
+    <div class="screen">
+      <h1>Выберите здоровье мага</h1>
+      <ul class="health-list" id="health-list">
+        <li>
+          <button class="health-btn" data-health="5">5 очков</button>
+        </li>
+        <li>
+          <button class="health-btn" data-health="10">10 очков</button>
+        </li>
+        <li>
+          <button class="health-btn" data-health="15">15 очков</button>
+        </li>
+        <li>
+          <button class="health-btn" data-health="20">20 очков</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="screen game">
+      <div class="mage-health">
+        Ваше здоровье: <span id="mage-health"></span>
+      </div>
+      <div class="board" id="board">
+        <div class="skill-mage">
+          <button class="skill-btn" id="cadiloDmg">
+            Удар боевым кадилом
+            <span class="tooltiptext" id=" skill 0">Текст подсказки</span>
+          </button>
+          <label for="skill-btn">Перезарядка <span id="cooldown"></span></label>
+          <button class="skill-btn" id="leftHeelDmg">
+            Вертушка левой пяткой
+            <span class="tooltiptext" id=" skill1">Текст подсказки</span>
+          </button>
+          <label for="skill-btn">Перезарядка <span id="cooldown"></span></label>
+          <button class="skill-btn" id="fireBallDmg">
+            Каноничный фаербол
+            <span class="tooltiptext" id=" skill2">Текст подсказки</span>
+          </button>
+          <label for="skill-btn">Перезарядка <span id="cooldown"></span></label>
+          <button class="skill-btn" id="magicBlock">
+            Магический блок
+            <span class="tooltiptext" id=" skill3">Текст подсказки</span>
+          </button>
+          <label for="skill-btn">Перезарядка <span id="cooldown"></span></label>
+        </div>
+        <button class="newGame" id="newGame">Начать новую игру</button>
+      </div>
+      <div class="monster-health">
+        Здоровье монстра Лютый : <span id="monster-health"></span>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

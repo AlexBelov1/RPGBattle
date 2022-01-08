@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css?family=Khula&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: #fff;
+  font-family: "Khula", sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  text-align: center;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #16d9e3;
+}
+
+.start {
+  font-size: 1.5rem;
+}
+
+h1 {
+  line-height: 1.4;
+  font-size: 4rem;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  transition: margin 0.5s ease-out;
+  background: linear-gradient(90deg, #29323c 0%, #485563 100%);
+}
+
+.screen.up {
+  margin-top: -100vh;
+}
+
+.health-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.health-list li {
+  margin: 10px;
+}
+.health-btn,
+.skill-btn,
+.newGame {
+  background-color: transparent;
+  border: 2px solid #c0c0c0;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+}
+
+.health-btn:hover,
+.skill-btn:hover,
+.newGame:hover {
+  border: 2px solid #16d9e3;
+  color: #16d9e3;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 500px;
+  height: 100vh;
+  background: linear-gradient(118.38deg, #29323c -4.6%, #485563 200.44%);
+  box-shadow: -8px -8px 20px #2a333d, 10px 7px 20px #475462;
+  border-radius: 30px;
+  overflow: hidden;
+  margin: 0 10%;
+}
+
+.skill-mage {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+label {
+  margin-bottom: 10px;
+}
+.game {
+  display: flex;
+  flex-direction: row;
+}
+.mage-health {
+  background-image: url(images/mage.png);
+}
+.monster-health {
+  background-image: url(images/monster.png);
+}
+
+/* Контейнер подсказок */
+.skill-btn {
+  position: relative;
+  display: inline-block;
+}
+
+/* Текст подсказки */
+.skill-btn .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Расположите текст подсказки */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Исчезают в подсказке */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Подсказка стрелка */
+.skill-btn .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Отображение текста подсказки при наведении курсора мыши на контейнер подсказки */
+.skill-btn:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
