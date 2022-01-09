@@ -33,36 +33,42 @@
     </div>
 
     <div class="screen game">
-      <div class="mage-health">
-        Ваше здоровье: <span id="mage-health"></span>
+      <div class="mage-side" id="mage-side">
+        <div class="mage-health">
+          Ваше здоровье: <span id="mage-health"></span>
+        </div>
+        <div class="moves" id="moves"></div>
       </div>
       <div class="board" id="board">
-        <div class="skill-mage">
-          <button class="skill-btn" id="cadiloDmg">
+        <div class="skill-mage" id="skill-mage">
+          <button class="skill-btn 0" id="cadiloDmg">
             Удар боевым кадилом
-            <span class="tooltiptext" id=" skill 0">Текст подсказки</span>
+            <span class="tooltiptext" id="skill0">Текст подсказки</span>
           </button>
-          <label for="skill-btn">Перезарядка <span id="cooldown"></span></label>
-          <button class="skill-btn" id="leftHeelDmg">
+          <label for="skill-btn"> <span id="cooldown0"></span></label>
+          <button class="skill-btn 1" id="leftHeelDmg">
             Вертушка левой пяткой
-            <span class="tooltiptext" id=" skill1">Текст подсказки</span>
+            <span class="tooltiptext" id="skill1">Текст подсказки</span>
           </button>
-          <label for="skill-btn">Перезарядка <span id="cooldown"></span></label>
-          <button class="skill-btn" id="fireBallDmg">
+          <label for="skill-btn"> <span id="cooldown1"></span></label>
+          <button class="skill-btn 2" id="fireBallDmg">
             Каноничный фаербол
-            <span class="tooltiptext" id=" skill2">Текст подсказки</span>
+            <span class="tooltiptext" id="skill2">Текст подсказки</span>
           </button>
-          <label for="skill-btn">Перезарядка <span id="cooldown"></span></label>
-          <button class="skill-btn" id="magicBlock">
+          <label for="skill-btn"> <span id="cooldown2"></span></label>
+          <button class="skill-btn 3" id="magicBlock">
             Магический блок
-            <span class="tooltiptext" id=" skill3">Текст подсказки</span>
+            <span class="tooltiptext" id="skill3">Текст подсказки</span>
           </button>
-          <label for="skill-btn">Перезарядка <span id="cooldown"></span></label>
+          <label for="skill-btn"> <span id="cooldown3"></span></label>
         </div>
         <button class="newGame" id="newGame">Начать новую игру</button>
       </div>
-      <div class="monster-health">
-        Здоровье монстра Лютый : <span id="monster-health"></span>
+      <div class="monster-side">
+        <div class="monster-health">
+          Здоровье монстра: <span id="monster-health"></span>
+        </div>
+        <div class="moves" id="movesMonster"></div>
       </div>
     </div>
     <script src="index.js"></script>
