@@ -81,8 +81,6 @@ let cooldownMoveMage = [
   0, //3
   0, //4
 ];
-
-let cooldownNow = [0, 0, 0];
 let cooldownMoveMonster = [
   //везде начальный 0,что позволит использовать любой скилл
   0,
@@ -103,13 +101,11 @@ for (let i = 0; i < mageSkill.length; i++) {
   Маг.броня:${mageSkill[i].magicArmorPercents}
   Откат:${mageSkill[i].cooldown} хода`;
 }
-
 //Открытие второй страницы после кнопки Начать игру
 startBtn.addEventListener("click", (event) => {
   event.preventDefault();
   screens[0].classList.add("up");
 });
-
 //Открытие страницы с игрой после выбора очков здоровья мага
 healthList.addEventListener("click", (event) => {
   if (event.target.classList.contains("health-btn")) {
@@ -118,70 +114,68 @@ healthList.addEventListener("click", (event) => {
     startGame();
   }
 });
-
 let randomMonsterSkill;
 function startGame() {
   monsterHealth.innerHTML = `${monster.maxHealth}`;
   mageHealth.innerHTML = `${mage.maxHealth}`;
   getRandomMonsterSkill();
-  console.log(randomMonsterSkill);
   cooldownMoveMage = [0, 0, 0, 0];
   cooldownMoveMonster = [0, 0, 0];
   for (let i = 0; i < cooldownMoveMage.length; i++) {
     document.getElementById(`cooldown${i}`).innerHTML = "Готов";
   }
 }
-
 //Проверка на конец игры
 function finishGame() {
   let result;
   if (mage.maxHealth <= 0 && monster.maxHealth <= 0) {
     result =
       `Вы убили монстра, но погибли сами ` +
-      '<img src="images/victory.png" alt="ничья" width="500" height="600" >';
+      '<img src="images/draw.png" alt="ничья" width="450" height="600" >';
     return (board.innerHTML = result);
   }
   if (mage.maxHealth <= 0) {
     result =
       `Вы проиграли ` +
-      '<img src="images/lose.png" alt="Поражение"  width="500" height="600">';
+      '<img src="images/lose.png" alt="Поражение"  width="450" height="600">';
     return (board.innerHTML = result);
   }
   if (monster.maxHealth <= 0) {
     result =
       `Вы победили монстра` +
-      '<img src="images/victory.png" alt="Победа"  width="500" height="600" >';
+      '<img src="images/victory.png" alt="Победа"  width="450" height="600" >';
     return (board.innerHTML = result);
   }
 }
 let monsterMoves = "";
 // Функция рандома скилла монстра
 function getRandomMonsterSkill() {
+  let availableSkills = [];
   for (let i = 0; i < cooldownMoveMonster.length; i++) {
     if (cooldownMoveMonster[i] !== 0) cooldownMoveMonster[i] -= 1;
+    else availableSkills.push(i);
   }
-  const index = Math.floor(Math.random() * cooldownNow.length);
+  const index =
+    availableSkills[Math.floor(Math.random() * availableSkills.length)];
   cooldownMoveMonster[index] = index == 1 ? 3 : index == 2 ? 2 : 0;
-  if (index !== 0) cooldownNow.splice(index, 1);
-
-  console.log(cooldownNow);
-  console.log(cooldownMoveMonster);
   randomMonsterSkill = monsterSkill[index];
-  monsterMoves += `<div class="move"> ${monsterSkill[index].name} </div>`;
+  if (monster.maxHealth > 0)
+    monsterMoves += `<div class="move"> ${monsterSkill[index].name} </div>`;
   return (
     (document.getElementById("movesMonster").innerHTML = monsterMoves),
     randomMonsterSkill
   );
 }
-
 // Функция хода
 function move(monsterSkill, mageSkill) {
   if (isDamageMonster(monsterSkill, mageSkill))
     mage.maxHealth =
       mage.maxHealth - monsterSkill.physicalDmg - monsterSkill.magicDmg;
+
   if (isDamageMage(monsterSkill, mageSkill))
     monster.maxHealth =
       monster.maxHealth - mageSkill.physicalDmg - mageSkill.magicDmg;
+
   return monster.maxHealth, mage.maxHealth;
 }
 // Функции проверки нанесения урона
@@ -198,6 +192,9 @@ function isDamageMage(monsterSkill, mageSkill) {
     mageSkill.magicDmg > monsterSkill.magicArmorPercents
   )
     return true;
+  else
+    return (document.getElementById("movesMonster").innerHTML =
+      "Урон блокирован!");
 }
 // Функции скиллов мага
 cadiloDmg.onclick = function () {
@@ -232,12 +229,9 @@ newGame.onclick = function () {
 
 let mageMoves = "";
 function skillClick(num) {
-  console.log(mageSkill[num]);
   move(randomMonsterSkill, mageSkill[num]);
   getRandomMonsterSkill();
-  console.log(randomMonsterSkill);
   cooldownChange(num);
-  console.log(cooldownMoveMage);
   if (monster.maxHealth > 0) {
     monsterHealth.innerHTML = `${monster.maxHealth}`;
   } else {
@@ -274,4 +268,4 @@ function cooldownChange(num) {
   }
 }
 
-// Функция вызова скилла монстра с КД, сделать красивую страницу поражения\ybxmz, попробовать пофиксить див с ходами
+// сделать красивую страницу поражения\ybxmz,
