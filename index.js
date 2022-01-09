@@ -82,6 +82,7 @@ let cooldownMoveMage = [
   0, //4
 ];
 
+let cooldownNow = [0, 0, 0];
 let cooldownMoveMonster = [
   //везде начальный 0,что позволит использовать любой скилл
   0,
@@ -128,7 +129,7 @@ function startGame() {
   cooldownMoveMonster = [0, 0, 0];
   for (let i = 0; i < cooldownMoveMage.length; i++) {
     document.getElementById(`cooldown${i}`).innerHTML = "Готов";
-  } //добавить для монстра
+  }
 }
 
 //Проверка на конец игры
@@ -137,27 +138,34 @@ function finishGame() {
   if (mage.maxHealth <= 0 && monster.maxHealth <= 0) {
     result =
       `Вы убили монстра, но погибли сами ` +
-      '<img src="images/victory.png" alt="ничья" >';
+      '<img src="images/victory.png" alt="ничья" width="500" height="600" >';
     return (board.innerHTML = result);
   }
   if (mage.maxHealth <= 0) {
-    result = `Вы проиграли ` + '<img src="images/victory.png" alt="ничья" >';
+    result =
+      `Вы проиграли ` +
+      '<img src="images/lose.png" alt="Поражение"  width="500" height="600">';
     return (board.innerHTML = result);
   }
   if (monster.maxHealth <= 0) {
     result =
-      `Вы победили монстра` + '<img src="images/victory.png" alt="ничья" >';
+      `Вы победили монстра` +
+      '<img src="images/victory.png" alt="Победа"  width="500" height="600" >';
     return (board.innerHTML = result);
   }
 }
 let monsterMoves = "";
 // Функция рандома скилла монстра
 function getRandomMonsterSkill() {
-  const index = Math.floor(Math.random() * monsterSkill.length);
-  if (cooldownMoveMonster[index] !== 0) {
-    cooldownMoveMonster[index] -= 1;
-    index = Math.floor(Math.random() * monsterSkill.length);
+  for (let i = 0; i < cooldownMoveMonster.length; i++) {
+    if (cooldownMoveMonster[i] !== 0) cooldownMoveMonster[i] -= 1;
   }
+  const index = Math.floor(Math.random() * cooldownNow.length);
+  cooldownMoveMonster[index] = index == 1 ? 3 : index == 2 ? 2 : 0;
+  if (index !== 0) cooldownNow.splice(index, 1);
+
+  console.log(cooldownNow);
+  console.log(cooldownMoveMonster);
   randomMonsterSkill = monsterSkill[index];
   monsterMoves += `<div class="move"> ${monsterSkill[index].name} </div>`;
   return (
@@ -212,6 +220,14 @@ magicBlock.onclick = function () {
 // Кнопка новой игры
 newGame.onclick = function () {
   screens[1].classList.remove("up");
+  monsterMoves = "";
+  mageMoves = "";
+  monster.maxHealth = 10;
+  return (
+    (monsterHealth.innerHTML = `${monster.maxHealth}`),
+    (document.getElementById("movesMonster").innerHTML = monsterMoves),
+    (document.getElementById("moves").innerHTML = mageMoves)
+  );
 };
 
 let mageMoves = "";
