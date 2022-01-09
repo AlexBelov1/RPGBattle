@@ -192,9 +192,6 @@ function isDamageMage(monsterSkill, mageSkill) {
     mageSkill.magicDmg > monsterSkill.magicArmorPercents
   )
     return true;
-  else
-    return (document.getElementById("movesMonster").innerHTML =
-      "Урон блокирован!");
 }
 // Функции скиллов мага
 cadiloDmg.onclick = function () {
@@ -267,5 +264,3 @@ function cooldownChange(num) {
     }
   }
 }
-
-// сделать красивую страницу поражения\ybxmz,
